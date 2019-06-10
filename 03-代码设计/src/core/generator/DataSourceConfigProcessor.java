@@ -217,6 +217,7 @@ public class DataSourceConfigProcessor extends DefaultHandler implements ErrorHa
 	public void fatalError(SAXParseException e) {
 		logger.error("Fatal error at line " + e.getLineNumber() + ": ");
 		logger.error(e.getMessage());
+		
 	}
 
 }

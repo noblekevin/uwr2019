@@ -56,11 +56,12 @@ public abstract class CollectionHolder extends DataHolder {
 		}
 		this.setSwap(String.valueOf(dataset.size()));
 		return dataset.size();
+	
 	}
 	
 	//按照变量名字返回和值，供回调。
 	@Override
-	public double sum(String attrname) {
+	public double sum(String attrname) {	
 		Iterator<DataHolder> itr = vars.iterator();
 		double dbsum = 0;
 		while(itr.hasNext()) {
@@ -113,5 +114,7 @@ public abstract class CollectionHolder extends DataHolder {
 		}
 		this.setSwap(String.valueOf(dbmin));
 		return dbmin;
+                
+
 	}
 }

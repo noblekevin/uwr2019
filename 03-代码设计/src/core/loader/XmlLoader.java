@@ -1,37 +1,25 @@
 package core.loader;
 
-import core.common.CollectionHolder;
-import core.common.DataHolder;
-import core.common.DataSourceConfig;
-import core.common.ListHolder;
-import core.common.MapHolder;
-import core.common.StreamDataSource;
-import core.common.VarHolder;
+import core.common.*;
 import core.generator.ReportGenerator;
 import core.render.LiteralRender;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
 import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
 
 /**
  * 统一Word报告生成系统（UWR）
@@ -67,7 +55,11 @@ public class XmlLoader extends DataLoader {
 			builder = factory.newDocumentBuilder();
 			doc = docs.get(((StreamDataSource)dh.getDataSource()).getPath());
 			if (doc == null) {
-				doc = builder.parse("file:///"+((StreamDataSource)dh.getDataSource()).getPath());
+				String url = "file:///" +
+						System.getProperty("user.dir") +
+						java.io.File.separator +
+						((StreamDataSource)dh.getDataSource()).getPath();
+				doc = builder.parse(url);
 				docs.put(((StreamDataSource)dh.getDataSource()).getPath(),doc);
 			}
 			XPathExpression expr = xpath.compile(dh.getExpr());

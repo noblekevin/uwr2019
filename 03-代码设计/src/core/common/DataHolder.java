@@ -74,8 +74,7 @@ public abstract class DataHolder implements DataType {
 	public String getType() {
 		return type;
 	}
-
-	public void setType(String type) {
+        public void setType(String type) {
 		if(VALUE.equalsIgnoreCase(type.trim()))
 			this.type = VALUE;
 		else if(LIST.equalsIgnoreCase(type.trim()))
